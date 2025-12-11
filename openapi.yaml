@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: Stripe RapidAPI Pack
+  version: 1.0.0
+  description: "A secure wrapper around Stripe for payments, customers, refunds and subscriptions."
+servers:
+  - url: https://{host}
+    variables:
+      host:
+        default: api.example.com
+paths:
+  /v1/create-payment-intent:
+    post:
+      summary: Create a Payment Intent
+      security:
+        - rapidapi_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                customerId:
+                  type: string
+      responses:
+        '200':
+          description: Payment intent created
+components:
+  securitySchemes:
+    rapidapi_key:
+      type: apiKey
+      in: header
+      name: x-rapidapi-key
